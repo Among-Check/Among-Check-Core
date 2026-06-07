@@ -10,7 +10,8 @@ Among-Check uses **named agent identities** — each with a codename, skill file
 
 ```mermaid
 flowchart TB
-  CMD[Commander — orchestrator]
+  CMD[Commander — attach]
+  CMD --> RT[Swarm runtime — Markers Sweeps Gate]
   CMD --> Red[Red — vuln]
   CMD --> Blue[Blue — config]
   CMD --> Green[Green — infra]
@@ -18,8 +19,10 @@ flowchart TB
   CMD --> Purple[Purple — tenant]
   CMD --> Yellow[Yellow — webhook]
   CMD --> Cyan[Cyan — browser]
+  Silver[Silver — sentinels] --> CMD
   Red & Blue & Green & Orange & Purple & Yellow & Cyan --> White[White — audit TOON]
   White --> Pink[Pink — fix prompts]
+  White --> RT
 ```
 
 | Agent | Hunts imposters like… |
@@ -48,6 +51,9 @@ flowchart TB
 
 | Task | Invoke |
 |------|--------|
+| Commander attach / fix-swarm coordination | `orchestrator` + `swarm-runtime` |
+| Sandbox, anchor, marker, sweep, gate CLI | `swarm-runtime` |
+| Stuck-agent recovery / sentinels | `agent-sentinel` |
 | Scaffold orchestrator / registry | `orchestrator` |
 | SQLi, XSS, IDOR, CSRF scanners | `agent-vuln` |
 | Headers, TLS, cookies, GDPR signals | `agent-config` |

@@ -9,18 +9,35 @@ Instructions for **all coding agents** (Cursor, Claude Code, Copilot, etc.) work
 ## Read first
 
 1. [docs/architecture.md](docs/architecture.md) — **how to build** (layouts, interfaces, phases)
-2. [docs/overview.md](docs/overview.md) — **what we build** (product intent)
-3. [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs (do not invent new IDs without updating catalog)
-4. [audits/latest.toon](audits/latest.toon) — **current security audit** (TOON; read when fixing security issues)
-5. [docs/audit-archive.md](docs/audit-archive.md) — TOON archive format and git commit behavior
-6. [skills/README.md](skills/README.md) — **agent identities** (Commander, Red, Blue, …)
-7. [docs/agent-skills.md](docs/agent-skills.md) — which skill to invoke per task
+2. [docs/swarm-runtime.md](docs/swarm-runtime.md) — **multi-agent orchestration** (Hub, Sandboxes, Markers, Gate)
+3. [docs/overview.md](docs/overview.md) — **what we build** (product intent)
+4. [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs (do not invent new IDs without updating catalog)
+5. [audits/latest.toon](audits/latest.toon) — **current security audit** (TOON; read when fixing security issues)
+6. [markers/index.toon](markers/index.toon) — **open work queue** (git-backed tasks)
+7. [docs/audit-archive.md](docs/audit-archive.md) — TOON archive format and git commit behavior
+8. [skills/README.md](skills/README.md) — **agent identities** (Commander, Red, Blue, …)
+9. [docs/agent-skills.md](docs/agent-skills.md) — which skill to invoke per task
 
 ---
 
 ## Project summary
 
 Among-Check Core is a TypeScript monorepo: an **agent swarm** of security scanners behind a shared orchestrator, CLI, and MCP server. Full scan target: **< 30 seconds**, **100+ checks**, every finding includes an **AI-ready fix prompt**. Every run **archives results to `audits/` in TOON** and **commits to git** by default so agents retain security history.
+
+---
+
+## Swarm runtime (multi-agent work)
+
+**Start through Commander attach** — do not micromanage scouts directly.
+
+1. Read `.among-check/hub.toon`, `markers/index.toon`, and `audits/latest.toon`
+2. One **Sandbox** per target Git repo — never mix codebases
+3. Track all work in **Markers** (`markers/`) — git is the source of truth, not chat
+4. Scouts work in **Anchors** (git worktrees); persist state in `state.toon`
+5. Bundle tasks into **Sweeps**; merge through **Gate** (test + re-scan) when enabled
+6. Use **tmux** when running parallel scouts and Silver sentinels
+
+See [docs/swarm-runtime.md](docs/swarm-runtime.md).
 
 ---
 
@@ -60,7 +77,8 @@ Each swarm member has a skill in `skills/<agent>/SKILL.md`:
 
 | Codename | Skill | Scope |
 |----------|-------|-------|
-| Commander | `orchestrator` | Orchestrator, registry |
+| Commander | `orchestrator` | Orchestrator, registry, Commander attach |
+| Silver | `agent-sentinel` | Stuck-agent watchdogs (Pulse, Relay, Patrol) |
 | Red | `agent-vuln` | `vuln.*` |
 | Blue | `agent-config` | `config.*` |
 | Green | `agent-infra` | `infra.*` |

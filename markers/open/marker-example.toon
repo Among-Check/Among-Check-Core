@@ -1,0 +1,15 @@
+markerId: marker-example
+title: Example — implement Phase 0 scaffold
+status: open
+priority: medium
+assignee: Commander
+source: manual
+sandboxId: ac-core
+createdAt: 2025-06-08T00:00:00Z
+acceptance:
+  - pnpm workspace builds
+  - core orchestrator stub exists
+  - CLI scan command runs
+description: |
+  Bootstrap packages/core, packages/cli, and packages/agents per architecture.md Phase 0.
+  This is a template marker — replace with real tasks from audit sync or manual create.

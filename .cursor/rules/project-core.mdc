@@ -9,7 +9,7 @@ alwaysApply: true
 
 ## Before coding
 
-Read `docs/architecture.md`, `AGENTS.md`, `docs/scanner-catalog.md`, `audits/latest.toon`, and the owning skill in `skills/<agent>/SKILL.md`.
+Read `docs/architecture.md`, `docs/swarm-runtime.md`, `AGENTS.md`, `docs/scanner-catalog.md`, `markers/index.toon`, `audits/latest.toon`, and the owning skill in `skills/<agent>/SKILL.md`. Multi-agent work starts with Commander attach.
 
 ## Structure
 

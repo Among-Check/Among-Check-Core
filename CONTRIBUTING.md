@@ -11,13 +11,14 @@ Thank you for helping build the agent swarm. This project is designed for both *
 Read these in order:
 
 1. [AGENTS.md](AGENTS.md)
-2. [docs/architecture.md](docs/architecture.md)
-3. [docs/scanner-catalog.md](docs/scanner-catalog.md)
+2. [docs/swarm-runtime.md](docs/swarm-runtime.md) — Commander attach, Markers, Gate
+3. [docs/architecture.md](docs/architecture.md)
+4. [docs/scanner-catalog.md](docs/scanner-catalog.md)
 
 Editor-specific entry points:
 
 - **Cursor:** `.cursor/rules/`, `.cursor/mcp.json`
-- **Claude Code:** `CLAUDE.md`, `.claude/settings.json`, `.claude/commands/`
+- **Claude Code:** `CLAUDE.md`, `.claude/settings.json`, `.claude/commands/` — start with `/commander`
 - **Agent identities:** `skills/<agent>/SKILL.md` — see [skills/README.md](skills/README.md)
 
 ---

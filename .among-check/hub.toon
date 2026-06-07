@@ -1,0 +1,16 @@
+hubId: among-check-core
+createdAt: 2025-06-08T00:00:00Z
+defaults:
+  parallel: 16
+  timeoutMs: 30000
+  sentinelEnabled: true
+  gateRequired: true
+  tmuxRecommended: true
+  gatePolicy: squash
+sentinel:
+  heartbeatIntervalMs: 300000
+  staleThresholdMs: 900000
+  patrolIntervalMs: 3600000
+  abandonedGraceMs: 86400000
+sandboxes[1]{id,repoPath,branch,status}:
+  ac-core,.,main,active

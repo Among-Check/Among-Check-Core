@@ -18,6 +18,7 @@ It acts as an automated security engineer: it finds misconfigurations and vulner
 | **Supply chain & secrets** | Leaked API keys/tokens in repos, insecure GitHub Actions and supply-chain config |
 | **AI-native workflow** | Every finding ships with an AI-ready fix prompt; MCP server for Cursor, Claude Code, and other editors |
 | **TOON audit archive** | Every scan commits security history to `audits/` in TOON for agent context |
+| **Swarm runtime** | Commander-led fix swarm: Sandboxes, Anchors, Markers, Sweeps, Gate, Sentinels |
 
 ## Notable scanners
 
@@ -33,6 +34,8 @@ It acts as an automated security engineer: it finds misconfigurations and vulner
 |-----|-------------|
 | [docs/overview.md](docs/overview.md) | Product capabilities and agent swarm design |
 | [docs/architecture.md](docs/architecture.md) | **Technical architecture for agentic codegen** |
+| [docs/swarm-runtime.md](docs/swarm-runtime.md) | **Multi-agent orchestration** (Markers, Anchors, Gate) |
+| [markers/index.toon](markers/index.toon) | Git-backed task queue for scouts |
 | [docs/scanner-catalog.md](docs/scanner-catalog.md) | Scanner IDs and implementation status |
 | [docs/audit-archive.md](docs/audit-archive.md) | TOON version-controlled audit history |
 | [audits/latest.toon](audits/latest.toon) | Latest security audit (agent-readable) |

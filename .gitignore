@@ -43,3 +43,6 @@ test-results/
 
 # Scan temp cache (audits/ including history/ is committed — do not ignore)
 .scan-cache/
+
+# Runtime anchor worktrees (state.toon lives in hub config; worktree checkouts are local)
+.among-check/sandboxes/

@@ -1,0 +1,24 @@
+# Swarm runtime
+
+## Entry point
+
+All multi-agent work starts with **Commander attach** — read `skills/swarm-runtime/SKILL.md` and `.among-check/hub.toon` before delegating to scouts.
+
+## Isolation
+
+- One **Sandbox** per Git repository
+- Scouts work in **Anchors** (git worktrees), not directly on `main`
+- Tasks live in **Markers** (`markers/`) — git is the source of truth
+
+## Workflow
+
+1. Read `markers/index.toon` + `audits/latest.toon`
+2. Assign **Sweeps** (batched markers) to one scout each
+3. Persist progress in anchor `state.toon`
+4. Complete via **Gate** (test + re-scan) when `gateRequired: true`
+
+## Parallel sessions
+
+Recommend **tmux** for multiple scouts and Silver sentinel patrol.
+
+See `docs/swarm-runtime.md` and `docs/architecture.md` §16.

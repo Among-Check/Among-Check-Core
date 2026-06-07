@@ -1,0 +1,4 @@
+hubId: among-check-core
+updatedAt: 2025-06-08T00:00:00Z
+markers[1]{markerId,status,title,assignee,priority}:
+  marker-example,open,Example — implement Phase 0 scaffold,Commander,medium

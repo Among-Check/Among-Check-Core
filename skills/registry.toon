@@ -1,7 +1,8 @@
 project: among-check-core
 tagline: Find imposters among codebase
-agents[10]{codename,skillId,category,packagePath}:
+agents[11]{codename,skillId,category,packagePath}:
   Commander,orchestrator,runtime,packages/core
+  Silver,agent-sentinel,runtime,packages/core
   Red,agent-vuln,vulnerability,packages/agents/vuln
   Blue,agent-config,configuration,packages/agents/config
   Green,agent-infra,infrastructure,packages/agents/infra
@@ -11,3 +12,5 @@ agents[10]{codename,skillId,category,packagePath}:
   Cyan,agent-browser,specialized,packages/agents/specialized
   White,agent-audit,archive,packages/core
   Pink,agent-fix,output,packages/core
+runtimeSkills[1]{skillId,packagePath}:
+  swarm-runtime,packages/core

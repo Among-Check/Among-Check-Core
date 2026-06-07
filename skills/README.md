@@ -8,7 +8,8 @@ Each folder is an **individual agent identity** in the Among-Check swarm — a C
 
 | Codename | Skill | Category | Role |
 |----------|-------|----------|------|
-| **Commander** | [orchestrator](orchestrator/SKILL.md) | Runtime | Dispatches swarm, merges findings, archives TOON |
+| **Commander** | [orchestrator](orchestrator/SKILL.md) | Runtime | Primary attach point; dispatches scan + fix swarms |
+| **Silver** | [agent-sentinel](agent-sentinel/SKILL.md) | Runtime | Pulse/Relay/Patrol watchdogs for stale anchors |
 | **Red** | [agent-vuln](agent-vuln/SKILL.md) | `vuln.*` | Injection, XSS, IDOR, CSRF, access control, CVEs |
 | **Blue** | [agent-config](agent-config/SKILL.md) | `config.*` | Headers, TLS, cookies, privacy/compliance signals |
 | **Green** | [agent-infra](agent-infra/SKILL.md) | `infra.*` | Vercel, Netlify, Cloudflare, Supabase, Firebase |
@@ -19,7 +20,13 @@ Each folder is an **individual agent identity** in the Among-Check swarm — a C
 | **White** | [agent-audit](agent-audit/SKILL.md) | Archive | TOON reports, git commits, delta/regression |
 | **Pink** | [agent-fix](agent-fix/SKILL.md) | Output | AI-ready fix prompts per finding |
 
+| **Runtime** | [swarm-runtime](swarm-runtime/SKILL.md) | Coordination | Hub, Sandboxes, Markers, Sweeps, Gate |
+
 Machine-readable manifest: [registry.toon](registry.toon)
+
+## Commander attach
+
+All multi-agent sessions start through Commander. Read [docs/swarm-runtime.md](../docs/swarm-runtime.md) before assigning scouts.
 
 ## Usage
 

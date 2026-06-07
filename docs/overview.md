@@ -189,6 +189,20 @@ Every scan is **committed to git** under `audits/` using **[TOON](https://toonfo
 
 See [audit-archive.md](./audit-archive.md).
 
+### Swarm runtime (multi-agent fix coordination)
+
+Beyond the 30-second scan pipeline, Among-Check coordinates **long-running fix work** across coding agents:
+
+- **Commander attach** — single entry point for all multi-agent sessions
+- **Sandboxes** — one isolated workspace per target Git repo
+- **Anchors** — git worktrees that persist scout state across restarts
+- **Markers** — git-backed tasks synced from audit findings
+- **Sweeps** — batched marker assignments per scout
+- **Gate** — verify-then-merge queue (tests + re-scan before merge)
+- **Silver sentinels** — detect stuck scouts and reroute work
+
+See [swarm-runtime.md](./swarm-runtime.md).
+
 ---
 
 ## Integration surfaces (planned)

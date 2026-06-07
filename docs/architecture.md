@@ -90,6 +90,13 @@ among-check-core/
 │   ├── latest.toon
 │   ├── index.toon
 │   └── history/
+├── markers/                  # Git-backed task tracker (see §16)
+│   ├── index.toon
+│   ├── open/
+│   └── closed/
+├── .among-check/             # Hub runtime state — sandboxes, anchors, gate (see §16)
+│   ├── hub.toon
+│   └── sandboxes/
 ├── skills/                   # Agent identity repo (SKILL.md per swarm member)
 │   ├── registry.toon
 │   ├── orchestrator/
@@ -607,9 +614,110 @@ Mirrored to `.cursor/skills/` for editor discovery. See [agent-skills.md](./agen
 
 ---
 
+## 16. Swarm runtime (fix-swarm orchestration)
+
+Long-running multi-agent work (remediating findings, implementing scanners) uses a **runtime layer** separate from the 30s scan pipeline. Full spec: [swarm-runtime.md](./swarm-runtime.md).
+
+### 16.1 Types (`packages/core/src/runtime.ts`)
+
+```typescript
+export type MarkerStatus = 'open' | 'in_progress' | 'closed' | 'cancelled';
+export type AnchorStatus = 'idle' | 'in_progress' | 'stale' | 'closed';
+export type GateStatus = 'pending' | 'running' | 'passed' | 'failed' | 'merged';
+
+export interface Marker {
+  markerId: string;
+  title: string;
+  status: MarkerStatus;
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  assignee: string;           // scout codename: Red, Blue, ...
+  source: 'audit' | 'manual' | 'scanner-request';
+  sandboxId: string;
+  findingId?: string;
+  findingLocation?: string;
+  acceptance: string[];
+  aiFixPrompt?: string;
+  createdAt: string;
+}
+
+export interface AnchorState {
+  anchorId: string;
+  agent: string;
+  sandboxId: string;
+  branch: string;
+  worktreePath: string;
+  markerIds: string[];
+  status: AnchorStatus;
+  lastHeartbeat: string;
+  checkpoint?: { summary: string; files: string[] };
+}
+
+export interface Sweep {
+  sweepId: string;
+  sandboxId: string;
+  assignee: string;
+  anchorId: string;
+  markerIds: string[];
+  status: 'assigned' | 'in_progress' | 'complete' | 'cancelled';
+  createdAt: string;
+  deadline?: string;
+}
+
+export interface GateJob {
+  gateId: string;
+  sweepId: string;
+  anchorId: string;
+  branch: string;
+  status: GateStatus;
+  checks: { name: string; status: 'pending' | 'passed' | 'failed' }[];
+}
+```
+
+### 16.2 CLI commands (Phase R2)
+
+```
+among-check commander status
+among-check sandbox create|list|use
+among-check anchor create|resume|list
+among-check marker create|list|close|sync-audit
+among-check sweep create|assign|status
+among-check gate enqueue|status|approve
+among-check sentinel status|patrol
+```
+
+### 16.3 Runtime pipeline
+
+1. **Commander attach** — read `hub.toon`, `markers/index.toon`, `audits/latest.toon`
+2. **marker sync-audit** — open Markers for each `delta.new` finding without a Marker
+3. **sweep assign** — bundle markers → scout; create/resume Anchor worktree
+4. Scout works in Anchor; writes heartbeat to `state.toon`
+5. **gate enqueue** — run tests + `runScan()` + verify acceptance → merge to default branch
+6. **Silver sentinel** — Pulse/Relay/Patrol on stale anchors (background)
+
+### 16.4 Git adapter extensions (`packages/shared/git/`)
+
+- `createWorktree(repoPath, branch, path)`
+- `removeWorktree(path)`
+- `listWorktrees(repoPath)`
+
+### 16.5 Best practices (enforced in AGENTS.md)
+
+| Practice | Implementation |
+|----------|----------------|
+| Delegate to Commander | `/commander` slash command; `swarm-runtime` skill |
+| One repo per Sandbox | `sandbox create --repo` isolation |
+| Git-backed tasks | `markers/` TOON files committed |
+| Persistent scout state | Anchor worktrees + `state.toon` |
+| Verify before merge | Gate queue (test + re-scan) |
+| Stuck agent recovery | Silver sentinels (Pulse, Relay, Patrol) |
+| Parallel stability | tmux recommended in `hub.toon` |
+
+---
+
 ## Related documents
 
 - [overview.md](./overview.md) — product capabilities
+- [swarm-runtime.md](./swarm-runtime.md) — fix-swarm orchestration
 - [agent-skills.md](./agent-skills.md) — agent identity roster
 - [audit-archive.md](./audit-archive.md) — TOON schemas, CI, redaction
 - [scanner-catalog.md](./scanner-catalog.md) — full check list

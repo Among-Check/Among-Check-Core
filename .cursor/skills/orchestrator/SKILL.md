@@ -32,11 +32,25 @@ You are the swarm lead. You do not hunt imposters directly — you **coordinate*
 4. Dedupe findings by `(id, location)` hash
 5. Never implement scanner logic here — delegate to category agents
 
+## Commander attach (required entry point)
+
+Humans and editors **start here** for all multi-agent work. Do not spawn scouts ad hoc.
+
+1. Read `.among-check/hub.toon` and active sandbox
+2. Read `markers/index.toon` + `audits/latest.toon`
+3. Sync open Markers from audit `delta.new` when fixing findings
+4. Assign **Sweeps** → scouts in **Anchors** (git worktrees)
+5. Enqueue **Gate** on sweep completion (test + re-scan before merge)
+
+Use `/commander` (Claude Code) or invoke `swarm-runtime` skill for fix-swarm coordination.
+
 ## Handoff
 
-After `runScan()` completes, call `archiveScanReport()` (White). Findings without `aiFixPrompt` go through Pink (`agent-fix`) before archive.
+After `runScan()` completes, call `archiveScanReport()` (White). Findings without `aiFixPrompt` go through Pink (`agent-fix`) before archive. Open Markers for new findings; assign Sweeps to scouts.
 
 ## References
 
-- [docs/architecture.md](../../docs/architecture.md) §3.4, §4, §14
+- [docs/architecture.md](../../docs/architecture.md) §3.4, §4, §14, §16
+- [docs/swarm-runtime.md](../../docs/swarm-runtime.md)
+- [skills/swarm-runtime/SKILL.md](../swarm-runtime/SKILL.md)
 - [skills/registry.toon](../registry.toon)

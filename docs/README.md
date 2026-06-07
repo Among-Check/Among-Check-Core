@@ -6,9 +6,11 @@
 |----------|----------|---------|
 | [overview.md](./overview.md) | Everyone | Product capabilities and philosophy |
 | [architecture.md](./architecture.md) | Engineers & coding agents | Technical design, interfaces, phases |
+| [swarm-runtime.md](./swarm-runtime.md) | Engineers & coding agents | Multi-agent orchestration (Markers, Gate) |
 | [scanner-catalog.md](./scanner-catalog.md) | Implementers | Stable scanner IDs and status |
 | [audit-archive.md](./audit-archive.md) | Engineers & agents | TOON audit archive in git |
 | [../audits/latest.toon](../audits/latest.toon) | Coding agents | Latest committed security audit |
+| [../markers/index.toon](../markers/index.toon) | Coding agents | Git-backed task queue |
 | [agent-skills.md](./agent-skills.md) | Coding agents | Swarm agent identities |
 | [../skills/README.md](../skills/README.md) | Implementers | Per-agent SKILL.md roster |
 
