@@ -55,4 +55,7 @@ jobs:
           test -f docs/scanner-catalog.md
           test -f docs/audit-archive.md
           test -f audits/latest.toon
+          test -f skills/registry.toon
+          test -f skills/orchestrator/SKILL.md
+          test -f .cursor/skills/orchestrator/SKILL.md
           test -f .cursor/rules/project-core.mdc

@@ -9,7 +9,7 @@ alwaysApply: true
 
 ## Before coding
 
-Read `docs/architecture.md`, `AGENTS.md`, `docs/scanner-catalog.md`, and `audits/latest.toon` (security context).
+Read `docs/architecture.md`, `AGENTS.md`, `docs/scanner-catalog.md`, `audits/latest.toon`, and the owning skill in `skills/<agent>/SKILL.md`.
 
 ## Structure
 

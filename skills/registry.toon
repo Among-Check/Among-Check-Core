@@ -1,0 +1,13 @@
+project: among-check-core
+tagline: Find imposters among codebase
+agents[10]{codename,skillId,category,packagePath}:
+  Commander,orchestrator,runtime,packages/core
+  Red,agent-vuln,vulnerability,packages/agents/vuln
+  Blue,agent-config,configuration,packages/agents/config
+  Green,agent-infra,infrastructure,packages/agents/infra
+  Orange,agent-supply,supply-chain,packages/agents/supply
+  Purple,agent-tenant,specialized,packages/agents/specialized
+  Yellow,agent-webhook,specialized,packages/agents/specialized
+  Cyan,agent-browser,specialized,packages/agents/specialized
+  White,agent-audit,archive,packages/core
+  Pink,agent-fix,output,packages/core

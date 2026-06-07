@@ -36,6 +36,8 @@ It acts as an automated security engineer: it finds misconfigurations and vulner
 | [docs/scanner-catalog.md](docs/scanner-catalog.md) | Scanner IDs and implementation status |
 | [docs/audit-archive.md](docs/audit-archive.md) | TOON version-controlled audit history |
 | [audits/latest.toon](audits/latest.toon) | Latest security audit (agent-readable) |
+| [skills/README.md](skills/README.md) | Agent identities (Commander, Red, Blue, …) |
+| [docs/agent-skills.md](docs/agent-skills.md) | Swarm skill registry and invoke guide |
 | [AGENTS.md](AGENTS.md) | Rules for all coding agents |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Human and agent contribution guide |
 
@@ -45,7 +47,7 @@ Preconfigured for AI-assisted development:
 
 | Tool | Config |
 |------|--------|
-| **Cursor** | [.cursor/rules/](.cursor/rules/), [.cursor/mcp.json](.cursor/mcp.json) |
+| **Cursor** | [.cursor/rules/](.cursor/rules/), [.cursor/skills/](.cursor/skills/), [.cursor/mcp.json](.cursor/mcp.json) |
 | **Claude Code** | [CLAUDE.md](CLAUDE.md), [.claude/](.claude/) |
 | **GitHub** | [.github/](.github/) — CI, issue/PR templates, Dependabot |
 

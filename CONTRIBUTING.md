@@ -18,6 +18,7 @@ Editor-specific entry points:
 
 - **Cursor:** `.cursor/rules/`, `.cursor/mcp.json`
 - **Claude Code:** `CLAUDE.md`, `.claude/settings.json`, `.claude/commands/`
+- **Agent identities:** `skills/<agent>/SKILL.md` — see [skills/README.md](skills/README.md)
 
 ---
 

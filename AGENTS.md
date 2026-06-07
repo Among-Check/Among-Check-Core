@@ -13,6 +13,8 @@ Instructions for **all coding agents** (Cursor, Claude Code, Copilot, etc.) work
 3. [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs (do not invent new IDs without updating catalog)
 4. [audits/latest.toon](audits/latest.toon) — **current security audit** (TOON; read when fixing security issues)
 5. [docs/audit-archive.md](docs/audit-archive.md) — TOON archive format and git commit behavior
+6. [skills/README.md](skills/README.md) — **agent identities** (Commander, Red, Blue, …)
+7. [docs/agent-skills.md](docs/agent-skills.md) — which skill to invoke per task
 
 ---
 
@@ -52,12 +54,33 @@ Follow **Phase 0 → 4** in [docs/architecture.md §10](docs/architecture.md#10-
 
 ---
 
+## Agent identities
+
+Each swarm member has a skill in `skills/<agent>/SKILL.md`:
+
+| Codename | Skill | Scope |
+|----------|-------|-------|
+| Commander | `orchestrator` | Orchestrator, registry |
+| Red | `agent-vuln` | `vuln.*` |
+| Blue | `agent-config` | `config.*` |
+| Green | `agent-infra` | `infra.*` |
+| Orange | `agent-supply` | `supply.*` |
+| Purple | `agent-tenant` | Tenant isolation |
+| Yellow | `agent-webhook` | Webhook signatures |
+| Cyan | `agent-browser` | Browser storage |
+| White | `agent-audit` | TOON archive |
+| Pink | `agent-fix` | AI fix prompts |
+
+**Invoke the owning agent's skill** before implementing its scanners.
+
 ## When adding a scanner
 
-1. Add/update `docs/scanner-catalog.md`
-2. Implement scanner + unit test
-3. Register in agents barrel
-4. Run tests for affected packages
+1. Identify owning agent in [skills/registry.toon](skills/registry.toon)
+2. Read that agent's `skills/<agent>/SKILL.md`
+3. Add/update `docs/scanner-catalog.md`
+4. Implement scanner + unit test
+5. Register in agents barrel
+6. Run tests for affected packages
 
 ---
 

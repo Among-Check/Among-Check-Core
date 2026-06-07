@@ -11,7 +11,8 @@
     "Follow Phase 0-4 implementation order in docs/architecture.md.",
     "Minimal diffs; do not refactor unrelated code.",
     "Read audits/latest.toon before security-related changes.",
-    "Every scan archives TOON to audits/ and git-commits by default; see docs/audit-archive.md."
+    "Every scan archives TOON to audits/ and git-commits by default; see docs/audit-archive.md.",
+    "Invoke the owning agent skill from skills/ before implementing scanners (see skills/registry.toon)."
   ],
   "preferredCommands": {
     "install": "pnpm install",

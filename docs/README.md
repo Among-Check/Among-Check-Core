@@ -9,6 +9,8 @@
 | [scanner-catalog.md](./scanner-catalog.md) | Implementers | Stable scanner IDs and status |
 | [audit-archive.md](./audit-archive.md) | Engineers & agents | TOON audit archive in git |
 | [../audits/latest.toon](../audits/latest.toon) | Coding agents | Latest committed security audit |
+| [agent-skills.md](./agent-skills.md) | Coding agents | Swarm agent identities |
+| [../skills/README.md](../skills/README.md) | Implementers | Per-agent SKILL.md roster |
 
 ## Agent entry points
 

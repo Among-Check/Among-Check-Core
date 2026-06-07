@@ -90,12 +90,19 @@ among-check-core/
 │   ├── latest.toon
 │   ├── index.toon
 │   └── history/
+├── skills/                   # Agent identity repo (SKILL.md per swarm member)
+│   ├── registry.toon
+│   ├── orchestrator/
+│   ├── agent-vuln/
+│   └── ...
 ├── docs/
 │   ├── overview.md
 │   ├── architecture.md       # this file
+│   ├── agent-skills.md       # skill invoke guide
 │   ├── audit-archive.md      # TOON schemas & agent workflow
 │   └── scanner-catalog.md
 ├── .cursor/
+│   └── skills/               # Mirror of skills/ for Cursor discovery
 ├── .claude/
 ├── .github/
 ├── AGENTS.md
@@ -581,10 +588,31 @@ Documented in [AGENTS.md](../AGENTS.md) and [.cursor/rules/project-core.mdc](../
 
 ---
 
+## 15. Agent skills repository
+
+Each swarm member has an **individual identity** as a Cursor/Claude skill in `skills/<agent>/SKILL.md`. Machine roster: `skills/registry.toon`. Invoke the owning skill before implementing that agent's scanners.
+
+| Codename | Skill ID | Package |
+|----------|----------|---------|
+| Commander | `orchestrator` | `packages/core` |
+| Red | `agent-vuln` | `packages/agents/vuln` |
+| Blue | `agent-config` | `packages/agents/config` |
+| Green | `agent-infra` | `packages/agents/infra` |
+| Orange | `agent-supply` | `packages/agents/supply` |
+| Purple / Yellow / Cyan | `agent-tenant`, `agent-webhook`, `agent-browser` | `packages/agents/specialized` |
+| White | `agent-audit` | `packages/core` (archive) |
+| Pink | `agent-fix` | `packages/core` (fix prompts) |
+
+Mirrored to `.cursor/skills/` for editor discovery. See [agent-skills.md](./agent-skills.md).
+
+---
+
 ## Related documents
 
 - [overview.md](./overview.md) — product capabilities
+- [agent-skills.md](./agent-skills.md) — agent identity roster
 - [audit-archive.md](./audit-archive.md) — TOON schemas, CI, redaction
 - [scanner-catalog.md](./scanner-catalog.md) — full check list
+- [skills/README.md](../skills/README.md) — canonical skill files
 - [AGENTS.md](../AGENTS.md) — agent workflow rules
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — human + agent contribution

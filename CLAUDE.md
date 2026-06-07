@@ -11,6 +11,7 @@ You are working on **Among-Check Core**, a security scanner agent swarm.
 - [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs
 - [audits/latest.toon](audits/latest.toon) — latest TOON security audit
 - [docs/audit-archive.md](docs/audit-archive.md) — audit version control
+- [skills/README.md](skills/README.md) — agent identities (invoke before implementing scanners)
 
 ## Your role
 

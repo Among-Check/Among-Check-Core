@@ -234,3 +234,5 @@ This document describes the **intended** Among-Check Core system. Implementation
 - [audit-archive.md](./audit-archive.md) — TOON audit history in git
 - [scanner-catalog.md](./scanner-catalog.md) — Scanner ID registry
 - [AGENTS.md](../AGENTS.md) — Coding agent instructions
+- [agent-skills.md](./agent-skills.md) — Swarm agent identities (skills repo)
+- [skills/README.md](../skills/README.md) — Commander, Red, Blue, and the full roster
