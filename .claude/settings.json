@@ -9,7 +9,9 @@
     "Use scanner IDs from docs/scanner-catalog.md only.",
     "Non-destructive security probes only; redact secrets in evidence.",
     "Follow Phase 0-4 implementation order in docs/architecture.md.",
-    "Minimal diffs; do not refactor unrelated code."
+    "Minimal diffs; do not refactor unrelated code.",
+    "Read audits/latest.toon before security-related changes.",
+    "Every scan archives TOON to audits/ and git-commits by default; see docs/audit-archive.md."
   ],
   "preferredCommands": {
     "install": "pnpm install",

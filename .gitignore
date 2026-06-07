@@ -41,6 +41,5 @@ test-results/
 .claude/settings.local.json
 .cursor/*.local.*
 
-# Scan output (local runs)
-among-check-report.*
+# Scan temp cache (audits/ including history/ is committed — do not ignore)
 .scan-cache/

@@ -9,6 +9,8 @@ You are working on **Among-Check Core**, a security scanner agent swarm.
 - [AGENTS.md](AGENTS.md) — universal agent rules
 - [docs/architecture.md](docs/architecture.md) — technical source of truth for codegen
 - [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs
+- [audits/latest.toon](audits/latest.toon) — latest TOON security audit
+- [docs/audit-archive.md](docs/audit-archive.md) — audit version control
 
 ## Your role
 

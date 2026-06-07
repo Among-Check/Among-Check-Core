@@ -31,6 +31,10 @@ pnpm build
 pnpm test
 ```
 
+### Security audit archive
+
+Every scan commits TOON files under `audits/`. See [docs/audit-archive.md](docs/audit-archive.md). Agents should read `audits/latest.toon` before security work.
+
 ### Adding a scanner
 
 1. Open or file a [scanner request](.github/ISSUE_TEMPLATE/scanner_request.md)

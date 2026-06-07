@@ -53,4 +53,6 @@ jobs:
           test -f CLAUDE.md
           test -f docs/architecture.md
           test -f docs/scanner-catalog.md
+          test -f docs/audit-archive.md
+          test -f audits/latest.toon
           test -f .cursor/rules/project-core.mdc

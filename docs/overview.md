@@ -183,6 +183,12 @@ A typical Among-Check report includes:
 
 Reports are structured (e.g. JSON) for CI gates and human-readable summaries for review.
 
+### TOON audit archive (version control)
+
+Every scan is **committed to git** under `audits/` using **[TOON](https://toonformat.dev/)** — a compact, agent-friendly format (~40% fewer tokens than JSON for finding lists). Coding agents read `audits/latest.toon` and `delta.toon` to see current issues, fixes, and regressions without re-scanning.
+
+See [audit-archive.md](./audit-archive.md).
+
 ---
 
 ## Integration surfaces (planned)
@@ -225,5 +231,6 @@ This document describes the **intended** Among-Check Core system. Implementation
 
 - [README](../README.md) — Project entry point and quick capability summary
 - [architecture.md](./architecture.md) — Technical design for implementation and codegen
+- [audit-archive.md](./audit-archive.md) — TOON audit history in git
 - [scanner-catalog.md](./scanner-catalog.md) — Scanner ID registry
 - [AGENTS.md](../AGENTS.md) — Coding agent instructions

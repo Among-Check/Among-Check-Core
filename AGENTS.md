@@ -11,12 +11,14 @@ Instructions for **all coding agents** (Cursor, Claude Code, Copilot, etc.) work
 1. [docs/architecture.md](docs/architecture.md) — **how to build** (layouts, interfaces, phases)
 2. [docs/overview.md](docs/overview.md) — **what we build** (product intent)
 3. [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs (do not invent new IDs without updating catalog)
+4. [audits/latest.toon](audits/latest.toon) — **current security audit** (TOON; read when fixing security issues)
+5. [docs/audit-archive.md](docs/audit-archive.md) — TOON archive format and git commit behavior
 
 ---
 
 ## Project summary
 
-Among-Check Core is a TypeScript monorepo: an **agent swarm** of security scanners behind a shared orchestrator, CLI, and MCP server. Full scan target: **< 30 seconds**, **100+ checks**, every finding includes an **AI-ready fix prompt**.
+Among-Check Core is a TypeScript monorepo: an **agent swarm** of security scanners behind a shared orchestrator, CLI, and MCP server. Full scan target: **< 30 seconds**, **100+ checks**, every finding includes an **AI-ready fix prompt**. Every run **archives results to `audits/` in TOON** and **commits to git** by default so agents retain security history.
 
 ---
 
@@ -29,6 +31,8 @@ Among-Check Core is a TypeScript monorepo: an **agent swarm** of security scanne
 - Non-destructive probes only; redact secrets in evidence
 - Minimal diffs — do not refactor unrelated code
 - Do not commit credentials, `.env`, or real customer data
+- Every scan must flow through `archiveScanReport()` — write TOON under `audits/`, update `latest.toon`, commit unless `archive.commit: false`
+- Read `audits/latest.toon` and latest `delta.toon` before working on security fixes
 
 ---
 

@@ -1,0 +1,26 @@
+---
+description: TOON audit archive and git commit conventions
+globs: audits/**/*,packages/**/audit-archive*,packages/**/toon/**
+alwaysApply: false
+---
+
+# Audit archive (TOON)
+
+## On every scan
+
+1. `archiveScanReport()` after `runScan()`
+2. Write `audits/history/<iso>/report.toon`, `findings.toon`, `delta.toon`
+3. Update `audits/latest.toon` and `audits/index.toon`
+4. Git commit: `chore(security): among-check audit <iso> (<n> findings)`
+
+## TOON
+
+- Use `@toon-format/toon` with strict decode
+- Tabular `findings[N]{id,severity,category,location,title}:` for agent reads
+- Redact secrets before write; never store bearer tokens
+
+## Agents
+
+Read `audits/latest.toon` first; use `delta.toon` for `new[]` / `resolved[]`.
+
+See `docs/audit-archive.md` and `docs/architecture.md` §14.

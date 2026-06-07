@@ -9,7 +9,7 @@ alwaysApply: true
 
 ## Before coding
 
-Read `docs/architecture.md`, `AGENTS.md`, and `docs/scanner-catalog.md`.
+Read `docs/architecture.md`, `AGENTS.md`, `docs/scanner-catalog.md`, and `audits/latest.toon` (security context).
 
 ## Structure
 
@@ -22,6 +22,12 @@ Read `docs/architecture.md`, `AGENTS.md`, and `docs/scanner-catalog.md`.
 - Scanner IDs match `docs/scanner-catalog.md` (`{category}.{kebab-name}`)
 - Non-destructive probes; redact secrets in evidence
 - Minimal diffs; no unrelated refactors
+
+## Audit archive
+
+- Every scan writes `audits/` in TOON and git-commits by default (`archiveScanReport()`)
+- See `docs/audit-archive.md` and `docs/architecture.md` §14
+- Check `delta.toon` for new/resolved findings after fixes
 
 ## Phases
 

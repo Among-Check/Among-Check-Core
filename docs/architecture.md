@@ -36,6 +36,8 @@ flowchart TB
 
   subgraph outputs [Outputs]
     JSON[JSON report]
+    TOON[TOON audit archive]
+    GIT[Git commit]
     MD[Markdown summary]
     CI[CI exit codes]
   end
@@ -53,6 +55,8 @@ flowchart TB
   Sn --> AGG
   AGG --> PROMPT
   PROMPT --> JSON
+  PROMPT --> TOON
+  TOON --> GIT
   PROMPT --> MD
   PROMPT --> CI
 ```
@@ -82,9 +86,14 @@ among-check-core/
 │   │   ├── supply/           # Secrets, GitHub Actions, dependencies
 │   │   └── specialized/      # Tenant isolation, webhooks, browser storage
 │   └── shared/               # HTTP, git, parsers, test actors, logging
+├── audits/                   # TOON audit archive (committed; see §14)
+│   ├── latest.toon
+│   ├── index.toon
+│   └── history/
 ├── docs/
 │   ├── overview.md
 │   ├── architecture.md       # this file
+│   ├── audit-archive.md      # TOON schemas & agent workflow
 │   └── scanner-catalog.md
 ├── .cursor/
 ├── .claude/
@@ -137,13 +146,22 @@ export interface CloudTarget {
   configPath?: string;
 }
 
+export interface AuditArchiveOptions {
+  enabled?: boolean;           // default true
+  commit?: boolean;            // git commit after write; default true
+  rootDir?: string;            // default: git root of target repo
+  directory?: string;          // default: 'audits'
+  writeDelta?: boolean;        // default true — delta.toon vs previous latest
+}
+
 export interface ScanOptions {
   timeoutMs?: number;          // default 30_000
   parallel?: number;           // default 16
   categories?: FindingCategory[];
   scannerIds?: string[];       // allowlist; default = all registered
   auth?: TestActor[];          // for tenant-isolation and authenticated checks
-  outputFormat?: 'json' | 'markdown';
+  outputFormat?: 'json' | 'markdown' | 'toon';
+  archive?: AuditArchiveOptions;
 }
 
 export interface TestActor {
@@ -329,11 +347,16 @@ among-check scan --url https://example.com
 among-check scan --repo .
 among-check scan --url https://app.example.com --auth actors.json
 among-check scan --repo . --category supply-chain
+among-check scan --repo . --format toon          # stdout TOON
+among-check scan --repo . --no-audit-commit      # write audits/ without git commit
+among-check audit log                            # print index.toon / latest summary
 among-check list-scanners
 among-check mcp   # optional: start MCP stdio from CLI shim
 ```
 
 Exit codes: `0` = no critical/high; `1` = findings ≥ high; `2` = runtime error.
+
+Every scan **writes** `audits/` in the target repo by default (see §14).
 
 ### 6.2 MCP server (`packages/mcp`)
 
@@ -341,9 +364,10 @@ Tools to expose:
 
 | Tool | Purpose |
 |------|---------|
-| `among_check_scan` | Run scan from editor |
+| `among_check_scan` | Run scan from editor; archives TOON + commits by default |
 | `among_check_list_scanners` | Introspect registry |
 | `among_check_explain_finding` | Expand one finding + fix prompt |
+| `among_check_read_audit` | Return `latest.toon`, `delta.toon`, and `index.toon` for agent context |
 
 Transport: **stdio** default; document HTTP in README when added.
 
@@ -383,6 +407,8 @@ Agents generating findings **must** use this helper — no hand-rolled one-off p
 | `parse/` | package.json, workflow YAML, Supabase/Firebase rules |
 | `browser/` | Playwright lifecycle for storage/XSS checks |
 | `logger/` | Structured JSON logs, scanner-scoped child loggers |
+| `toon/` | `encodeReport`, `decodeReport`, strict validation via `@toon-format/toon` |
+| `git/` (extended) | `commitAuditArchive()` — stage `audits/` and commit with conventional message |
 
 ---
 
@@ -408,8 +434,10 @@ Agents generating findings **must** use this helper — no hand-rolled one-off p
 
 - [ ] pnpm workspace, `tsconfig.base.json`, ESLint, Vitest
 - [ ] `core` types + registry + orchestrator (stub scanners)
-- [ ] `cli` with `scan` and `list-scanners`
+- [ ] `cli` with `scan`, `list-scanners`, and `audit log`
 - [ ] Empty `agents` barrel
+- [ ] `core` audit archiver stub + TOON encode/decode round-trip tests
+- [ ] `audits/` layout + placeholder `latest.toon` / `index.toon`
 
 ### Phase 1 — Config & supply (fast wins)
 
@@ -434,8 +462,9 @@ Agents generating findings **must** use this helper — no hand-rolled one-off p
 ### Phase 4 — Specialized + MCP
 
 - [ ] Tenant isolation, webhook, browser storage
-- [ ] MCP server tools
+- [ ] MCP server tools (include `among_check_read_audit`)
 - [ ] Markdown report formatter
+- [ ] Audit archiver: delta computation + git auto-commit
 
 ---
 
@@ -472,9 +501,90 @@ Coding agents **must**:
 
 ---
 
+## 14. Audit archive (TOON version control)
+
+Every scan run is **persisted to git** so coding agents retain security context across sessions. Full spec: [audit-archive.md](./audit-archive.md).
+
+### 14.1 Pipeline (`packages/core/src/audit-archive.ts`)
+
+Runs **after** `runScan()` succeeds (partial reports allowed on timeout — still archive with `metadata.partial: true`).
+
+```typescript
+export interface AuditArchiveResult {
+  directory: string;           // absolute path to audits/
+  files: string[];             // written paths
+  committed: boolean;
+  commitSha?: string;
+  delta?: AuditDelta;
+}
+
+export interface AuditDelta {
+  previousScanId?: string;
+  currentScanId: string;
+  newFindings: Pick<Finding, 'id' | 'severity' | 'location'>[];
+  resolvedFindings: Pick<Finding, 'id' | 'location'>[];
+  unchangedCount: number;
+}
+
+export async function archiveScanReport(
+  report: ScanReport,
+  options: AuditArchiveOptions,
+  deps: { toon: ToonCodec; git: GitAdapter; fs: FileSystemAdapter }
+): Promise<AuditArchiveResult>;
+```
+
+**Steps:**
+
+1. Resolve git root from `target.repoPath` or `process.cwd()`
+2. Redact secrets in report (see [audit-archive.md](./audit-archive.md))
+3. Encode full report → `history/<iso>/report.toon`
+4. Emit tabular `findings.toon` (uniform array — optimal TOON shape)
+5. Load previous `latest.toon`, compute `delta.toon`, write to history
+6. Overwrite `latest.toon` and prepend run to `index.toon`
+7. If `commit: true` and inside git repo: `git add audits/` + commit:
+
+   `chore(security): among-check audit <iso> (<n> findings)`
+
+**Never** commit if `commit: false`, not a git repo, or `CI` env with `AMONG_CHECK_AUDIT_COMMIT=false`.
+
+### 14.2 TOON codec (`packages/shared/toon/`)
+
+- Dependency: `@toon-format/toon`
+- `encodeReport(report: ScanReport): string` — canonical field order for stable diffs
+- `decodeReport(toon: string): ScanReport` — `strict: true`
+- `encodeFindingsTable(findings: Finding[]): string` — tabular subset for agents
+- `encodeDelta(delta: AuditDelta): string`
+
+Agents reading TOON should prefer `findings.toon` and `delta.toon` over full `report.toon` unless they need `aiFixPrompt` text.
+
+### 14.3 Orchestrator integration
+
+```typescript
+const report = await runScan(target, options, registry);
+if (options.archive?.enabled !== false) {
+  await archiveScanReport(report, options.archive ?? {}, deps);
+}
+return report;
+```
+
+CLI, MCP, and CI **all** call this path — no duplicate archive logic in entry surfaces.
+
+### 14.4 Agent contract
+
+Coding agents working in a repo scanned by Among-Check **must**:
+
+1. Read `audits/latest.toon` at session start when touching security-sensitive code
+2. After fixes, expect a new audit commit; verify `resolved[]` in latest `delta.toon`
+3. Treat `new[]` in `delta.toon` as regressions to fix before merge
+
+Documented in [AGENTS.md](../AGENTS.md) and [.cursor/rules/project-core.mdc](../.cursor/rules/project-core.mdc).
+
+---
+
 ## Related documents
 
 - [overview.md](./overview.md) — product capabilities
+- [audit-archive.md](./audit-archive.md) — TOON schemas, CI, redaction
 - [scanner-catalog.md](./scanner-catalog.md) — full check list
 - [AGENTS.md](../AGENTS.md) — agent workflow rules
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — human + agent contribution
