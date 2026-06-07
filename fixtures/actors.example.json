@@ -1,0 +1,12 @@
+[
+  {
+    "id": "actor-a",
+    "label": "Tenant A test user",
+    "bearerToken": "REDACTED_USE_TEST_TOKEN"
+  },
+  {
+    "id": "actor-b",
+    "label": "Tenant B test user",
+    "bearerToken": "REDACTED_USE_TEST_TOKEN"
+  }
+]

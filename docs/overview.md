@@ -224,3 +224,6 @@ This document describes the **intended** Among-Check Core system. Implementation
 ## Related reading
 
 - [README](../README.md) — Project entry point and quick capability summary
+- [architecture.md](./architecture.md) — Technical design for implementation and codegen
+- [scanner-catalog.md](./scanner-catalog.md) — Scanner ID registry
+- [AGENTS.md](../AGENTS.md) — Coding agent instructions

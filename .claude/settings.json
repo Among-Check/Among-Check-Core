@@ -1,0 +1,20 @@
+{
+  "project": "Among-Check Core",
+  "tagline": "Find imposters among codebase",
+  "instructions": [
+    "Read AGENTS.md and docs/architecture.md before generating code.",
+    "Follow the pnpm monorepo layout in docs/architecture.md.",
+    "Implement scanners using the Scanner interface; register in packages/agents/src/index.ts.",
+    "Every Finding must include aiFixPrompt via buildAiFixPrompt().",
+    "Use scanner IDs from docs/scanner-catalog.md only.",
+    "Non-destructive security probes only; redact secrets in evidence.",
+    "Follow Phase 0-4 implementation order in docs/architecture.md.",
+    "Minimal diffs; do not refactor unrelated code."
+  ],
+  "preferredCommands": {
+    "install": "pnpm install",
+    "build": "pnpm build",
+    "test": "pnpm test",
+    "scan": "pnpm among-check scan"
+  }
+}

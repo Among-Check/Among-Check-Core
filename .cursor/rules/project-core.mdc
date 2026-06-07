@@ -1,0 +1,28 @@
+---
+description: Among-Check Core project standards for all agent work
+alwaysApply: true
+---
+
+# Among-Check Core
+
+**Tagline:** Find imposters among codebase.
+
+## Before coding
+
+Read `docs/architecture.md`, `AGENTS.md`, and `docs/scanner-catalog.md`.
+
+## Structure
+
+- pnpm monorepo: `packages/core`, `packages/cli`, `packages/mcp`, `packages/agents`, `packages/shared`
+- Scanners implement `Scanner` from `core`; register in `packages/agents/src/index.ts`
+
+## Requirements
+
+- Every `Finding` includes `aiFixPrompt` via `buildAiFixPrompt()`
+- Scanner IDs match `docs/scanner-catalog.md` (`{category}.{kebab-name}`)
+- Non-destructive probes; redact secrets in evidence
+- Minimal diffs; no unrelated refactors
+
+## Phases
+
+Follow implementation phases in `docs/architecture.md` §10 (Phase 0 scaffold first).

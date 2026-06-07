@@ -1,0 +1,42 @@
+---
+description: Conventions for implementing security scanner agents
+globs: packages/agents/**/*
+alwaysApply: false
+---
+
+# Scanner agents
+
+## File layout
+
+- `packages/agents/{vuln,config,infra,supply,specialized}/{name}.scanner.ts`
+- Colocated `{name}.scanner.test.ts`
+
+## Scanner contract
+
+```typescript
+export const myScanner: Scanner = {
+  meta: {
+    id: 'config.missing-hsts',  // must match scanner-catalog.md
+    name: 'Missing HSTS',
+    category: 'configuration',
+    description: '...',
+    tags: ['headers', 'tls'],
+    estimatedMs: 500,
+    requiresUrl: true,
+  },
+  async run(ctx) {
+    if (!ctx.target.url) return [];
+    // ... return Finding[] or []
+  },
+};
+```
+
+## Finding rules
+
+- Use `buildAiFixPrompt()` from `core` — never omit `aiFixPrompt`
+- Return `[]` when target type does not apply; throw only on unexpected errors
+- Single-purpose scanners; no multi-check mega-files
+
+## Testing
+
+Mock `ScannerContext`; assert severity, `id`, and redacted evidence.

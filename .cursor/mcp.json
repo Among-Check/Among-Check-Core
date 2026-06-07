@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "among-check": {
+      "command": "node",
+      "args": ["packages/mcp/dist/index.js"],
+      "env": {}
+    }
+  }
+}

@@ -1,0 +1,25 @@
+---
+description: CLI and MCP server entry surface conventions
+globs: packages/{cli,mcp}/**/*
+alwaysApply: false
+---
+
+# CLI & MCP
+
+## CLI (`packages/cli`)
+
+- Commands: `scan`, `list-scanners`, optional `mcp`
+- Delegate to `runScan()` from `core` — no scan logic in CLI
+- Exit codes: `0` clean, `1` high/critical findings, `2` runtime error
+
+## MCP (`packages/mcp`)
+
+Tools: `among_check_scan`, `among_check_list_scanners`, `among_check_explain_finding`
+
+- stdio transport default
+- Tool schemas must document `ScanTarget` and `ScanOptions` fields
+- Stream progress via MCP logging where supported
+
+## Shared rule
+
+Entry surfaces are thin wrappers over `core` + `agents` registry.

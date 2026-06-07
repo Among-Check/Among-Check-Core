@@ -28,10 +28,26 @@ It acts as an automated security engineer: it finds misconfigurations and vulner
 
 ## Documentation
 
-Full product and architecture details: **[docs/overview.md](docs/overview.md)**
+| Doc | Description |
+|-----|-------------|
+| [docs/overview.md](docs/overview.md) | Product capabilities and agent swarm design |
+| [docs/architecture.md](docs/architecture.md) | **Technical architecture for agentic codegen** |
+| [docs/scanner-catalog.md](docs/scanner-catalog.md) | Scanner IDs and implementation status |
+| [AGENTS.md](AGENTS.md) | Rules for all coding agents |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Human and agent contribution guide |
+
+## Agent tooling
+
+Preconfigured for AI-assisted development:
+
+| Tool | Config |
+|------|--------|
+| **Cursor** | [.cursor/rules/](.cursor/rules/), [.cursor/mcp.json](.cursor/mcp.json) |
+| **Claude Code** | [CLAUDE.md](CLAUDE.md), [.claude/](.claude/) |
+| **GitHub** | [.github/](.github/) — CI, issue/PR templates, Dependabot |
 
 ---
 
 ## Status
 
-Among-Check Core is under active development. The agent swarm and scanner catalog are being implemented; documentation describes the intended system design and capabilities.
+Documentation and agent scaffolding are ready. Application code starts at **Phase 0** in [docs/architecture.md](docs/architecture.md) (pnpm monorepo, core orchestrator, CLI, MCP stub).

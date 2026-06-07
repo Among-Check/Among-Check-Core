@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build
+dist/
+build/
+*.tsbuildinfo
+
+# Test & coverage
+coverage/
+.nyc_output/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# OS & editors
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Playwright / browser fixtures
+playwright-report/
+test-results/
+.blob_storage/
+
+# Claude / Cursor local
+.claude/settings.local.json
+.cursor/*.local.*
+
+# Scan output (local runs)
+among-check-report.*
+.scan-cache/
