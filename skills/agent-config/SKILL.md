@@ -30,7 +30,26 @@ You expose **configuration imposters**: sites that look hardened (HTTPS, cookies
 - Compliance checks are **heuristics** — never claim legal certification
 - One scanner per header/flag — no mega-scanner files
 
+## External skills (load when needed)
+
+> Config checks are passive (no probes sent). Sandbox still recommended for TLS inspection tools.
+
+| Skill folder | Use for |
+|---|---|
+| `performing-ssl-tls-security-assessment` | TLS posture audit |
+| `performing-ssl-certificate-lifecycle-management` | Cert validity & expiry |
+| `configuring-tls-1-3-for-secure-communications` | TLS 1.3 hardening guidance |
+| `performing-ssl-tls-inspection-configuration` | Inspection config review |
+| `performing-security-headers-audit` | Full headers checklist |
+| `performing-cryptographic-audit-of-application` | Crypto primitives audit |
+| `configuring-certificate-authority-with-openssl` | Internal CA setup |
+| `performing-privacy-impact-assessment` | GDPR/privacy signals |
+| `implementing-gdpr-data-protection-controls` | GDPR controls |
+| `implementing-pci-dss-compliance-controls` | PCI-DSS controls |
+| `testing-for-sensitive-data-exposure` | Data exposure checks |
+
 ## References
 
 - [docs/scanner-catalog.md](../../docs/scanner-catalog.md)
 - [docs/architecture.md](../../docs/architecture.md)
+- [docs/sandbox.md](../../docs/sandbox.md)

@@ -38,7 +38,20 @@ You catch **client-side imposters**: auth that looks server-sessioned but stores
 - high severity for refresh tokens in localStorage
 - Note XSS amplification risk in impact text
 
+## External skills (load when needed)
+
+> Playwright runs inside sandbox (headless Chromium). No interactive browser or real user session.
+
+| Skill folder | Use for |
+|---|---|
+| `testing-for-sensitive-data-exposure` | Data exposure in responses |
+| `testing-mobile-api-authentication` | Mobile/API auth patterns |
+| `testing-websocket-api-security` | WebSocket security |
+| `analyzing-browser-forensics-with-hindsight` | Browser artifact forensics |
+| `extracting-browser-history-artifacts` | Browser history artifacts |
+
 ## References
 
 - [docs/architecture.md](../../docs/architecture.md) §5.3
 - [docs/overview.md](../../docs/overview.md) — Browser storage
+- [docs/sandbox.md](../../docs/sandbox.md)

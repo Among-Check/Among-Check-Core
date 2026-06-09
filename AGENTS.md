@@ -8,15 +8,16 @@ Instructions for **all coding agents** (Cursor, Claude Code, Copilot, etc.) work
 
 ## Read first
 
-1. [docs/architecture.md](docs/architecture.md) — **how to build** (layouts, interfaces, phases)
+1. [docs/architecture.md](docs/architecture.md) — **how to build** (§1–§19, layouts, interfaces, phases)
 2. [docs/swarm-runtime.md](docs/swarm-runtime.md) — **multi-agent orchestration** (Hub, Sandboxes, Markers, Gate)
-3. [docs/overview.md](docs/overview.md) — **what we build** (product intent)
-4. [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs (do not invent new IDs without updating catalog)
-5. [audits/latest.toon](audits/latest.toon) — **current security audit** (TOON; read when fixing security issues)
-6. [markers/index.toon](markers/index.toon) — **open work queue** (git-backed tasks)
-7. [docs/audit-archive.md](docs/audit-archive.md) — TOON archive format and git commit behavior
-8. [skills/README.md](skills/README.md) — **agent identities** (Commander, Red, Blue, …)
-9. [docs/agent-skills.md](docs/agent-skills.md) — which skill to invoke per task
+3. [docs/sandbox.md](docs/sandbox.md) — **Docker isolation** (all probe execution runs here)
+4. [docs/overview.md](docs/overview.md) — **what we build** (product intent)
+5. [docs/scanner-catalog.md](docs/scanner-catalog.md) — scanner IDs (do not invent new IDs without updating catalog)
+6. [audits/latest.toon](audits/latest.toon) — **current security audit** (TOON; read when fixing security issues)
+7. [markers/index.toon](markers/index.toon) — **open work queue** (git-backed tasks)
+8. [docs/audit-archive.md](docs/audit-archive.md) — TOON archive format and git commit behavior
+9. [skills/README.md](skills/README.md) — **agent identities + 769 cybersecurity skills**
+10. [docs/agent-skills.md](docs/agent-skills.md) — which skill to invoke per task
 
 ---
 
@@ -41,6 +42,20 @@ See [docs/swarm-runtime.md](docs/swarm-runtime.md).
 
 ---
 
+## Sandbox (required for scan execution)
+
+**All scan agents that run tools or probes execute inside Docker.** See [docs/sandbox.md](docs/sandbox.md).
+
+```bash
+docker build -f docker/scanner.Dockerfile -t among-check-scanner .
+docker run --rm --read-only --tmpfs /tmp:rw,size=256m \
+  --cap-drop ALL --security-opt no-new-privileges \
+  -v "$(pwd)/audits:/scan/audits:rw" \
+  among-check-scanner scan --url https://example.com
+```
+
+Rationale: external skills (sqlmap, Nikto, Playwright, gitleaks, awscli) can be dangerous on bare host.
+
 ## Hard rules
 
 - Follow the package layout in `docs/architecture.md` — no alternate structures
@@ -48,6 +63,9 @@ See [docs/swarm-runtime.md](docs/swarm-runtime.md).
 - Every `Finding` must include `aiFixPrompt` via `buildAiFixPrompt()`
 - Scanner IDs must match `docs/scanner-catalog.md`
 - Non-destructive probes only; redact secrets in evidence
+- **All tool execution (probes, scanners, external skills) runs inside Docker sandbox** — never bare host
+- No real production credentials in containers or fixtures
+- External skill workflows are reference-only unless running inside sandbox
 - Minimal diffs — do not refactor unrelated code
 - Do not commit credentials, `.env`, or real customer data
 - Every scan must flow through `archiveScanReport()` — write TOON under `audits/`, update `latest.toon`, commit unless `archive.commit: false`

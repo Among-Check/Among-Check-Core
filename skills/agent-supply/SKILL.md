@@ -39,6 +39,28 @@ You catch **supply-chain imposters**: repos that pass review but still have keys
 | `supply.leaked-token` | high |
 | `supply.gh-actions-permissions` | high |
 
+## External skills (load when needed)
+
+> All git/repo scans run inside sandbox. Never expose real secrets outside the container.
+
+| Skill folder | Use for |
+|---|---|
+| `implementing-secret-scanning-with-gitleaks` | Git history secret scan |
+| `implementing-secrets-scanning-in-ci-cd` | CI/CD secrets pipeline |
+| `implementing-hashicorp-vault-dynamic-secrets` | Vault migration guidance |
+| `securing-github-actions-workflows` | GH Actions hardening |
+| `implementing-github-advanced-security-for-code-scanning` | GHAS setup |
+| `integrating-sast-into-github-actions-pipeline` | SAST in CI |
+| `detecting-supply-chain-attacks-in-ci-cd` | Supply chain detection |
+| `performing-sca-dependency-scanning-with-snyk` | Dependency CVE scan |
+| `implementing-code-signing-for-artifacts` | Artifact signing |
+| `building-devsecops-pipeline-with-gitlab-ci` | GitLab CI security |
+| `11-csoc-automation` | SOC automation reference |
+
+## References
+
+- [docs/sandbox.md](../../docs/sandbox.md)
+
 ## References
 
 - [docs/scanner-catalog.md](../../docs/scanner-catalog.md)

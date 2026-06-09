@@ -21,6 +21,8 @@ Read `docs/architecture.md`, `docs/swarm-runtime.md`, `AGENTS.md`, `docs/scanner
 - Every `Finding` includes `aiFixPrompt` via `buildAiFixPrompt()`
 - Scanner IDs match `docs/scanner-catalog.md` (`{category}.{kebab-name}`)
 - Non-destructive probes; redact secrets in evidence
+- **All tool/probe execution runs inside Docker sandbox** — see `docs/sandbox.md` and `docker/`
+- External skills in `skills/<name>/SKILL.md` are reference-only unless running in sandbox
 - Minimal diffs; no unrelated refactors
 
 ## Audit archive

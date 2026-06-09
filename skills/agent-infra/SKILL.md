@@ -30,7 +30,36 @@ You find **cloud imposters**: Supabase tables with RLS "on" but policies that al
 - `infra.supabase-rls-permissive` = critical when anon role can read/write all rows
 - Use `shared/parse/` for rules YAML/JSON — don't duplicate parsers
 
+## External skills (load when needed)
+
+> Cloud config parsing is read-only. CLI tools (awscli, gcloud) run inside sandbox with read-only credentials.
+
+| Skill folder | Use for |
+|---|---|
+| `implementing-cloud-security-posture-management` | CSPM baseline |
+| `detecting-aws-cloudtrail-anomalies` | CloudTrail audit |
+| `auditing-aws-s3-bucket-permissions` | S3 bucket ACLs |
+| `securing-aws-iam-permissions` | IAM policy review |
+| `performing-cloud-forensics-with-aws-cloudtrail` | AWS forensics |
+| `performing-cloud-log-forensics-with-athena` | Log forensics |
+| `performing-cloud-native-threat-hunting-with-aws-detective` | AWS Detective |
+| `implementing-azure-defender-for-cloud` | Azure Defender config |
+| `performing-gcp-penetration-testing-with-gcpbucketbrute` | GCP bucket exposure |
+| `analyzing-cloud-storage-access-patterns` | Storage access anomalies |
+| `implementing-cloud-waf-rules` | WAF rule review |
+| `securing-serverless-functions` | Serverless hardening |
+| `performing-serverless-function-security-review` | Function code review |
+| `securing-aws-lambda-execution-roles` | Lambda IAM roles |
+| `performing-container-security-scanning-with-trivy` | Image scanning |
+| `scanning-containers-with-trivy-in-cicd` | Trivy in CI |
+| `implementing-kubernetes-pod-security-standards` | Pod security |
+| `auditing-kubernetes-cluster-rbac` | K8s RBAC audit |
+| `implementing-infrastructure-as-code-security-scanning` | IaC scanning |
+| `implementing-rbac-hardening-for-kubernetes` | K8s RBAC hardening |
+| `10-cloud-security` | Cloud security broad reference |
+
 ## References
 
 - [docs/scanner-catalog.md](../../docs/scanner-catalog.md)
 - [docs/overview.md](../../docs/overview.md) — Infrastructure & cloud table
+- [docs/sandbox.md](../../docs/sandbox.md)

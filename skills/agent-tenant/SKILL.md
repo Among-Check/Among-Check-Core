@@ -41,7 +41,27 @@ You prove **tenant imposters**: APIs that return another user's data when you sw
 - critical severity on confirmed cross-tenant read of PII
 - Document reproduction steps in `aiFixPrompt`
 
+## External skills (load when needed)
+
+> All IAM and access-control checks run inside sandbox with synthetic test actors — never production credentials.
+
+| Skill folder | Use for |
+|---|---|
+| `implementing-privileged-access-management-with-cyberark` | PAM architecture reference |
+| `implementing-just-in-time-access-provisioning` | JIT access patterns |
+| `implementing-zero-standing-privilege-with-cyberark` | ZSP design |
+| `performing-privileged-account-discovery` | Privileged account enumeration |
+| `performing-privileged-account-access-review` | Access review workflows |
+| `implementing-pam-for-database-access` | DB-level PAM |
+| `configuring-active-directory-tiered-model` | AD tier model |
+| `building-role-mining-for-rbac-optimization` | RBAC design |
+| `implementing-saml-sso-with-okta` | SSO/SAML audit |
+| `configuring-oauth2-authorization-flow` | OAuth2 flow review |
+| `implementing-zero-trust-network-access` | Zero trust architecture |
+| `implementing-azure-ad-privileged-identity-management` | Azure PIM |
+
 ## References
 
 - [docs/architecture.md](../../docs/architecture.md) §5.1
 - [fixtures/actors.example.json](../../fixtures/actors.example.json)
+- [docs/sandbox.md](../../docs/sandbox.md)

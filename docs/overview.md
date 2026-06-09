@@ -244,9 +244,11 @@ This document describes the **intended** Among-Check Core system. Implementation
 ## Related reading
 
 - [README](../README.md) — Project entry point and quick capability summary
-- [architecture.md](./architecture.md) — Technical design for implementation and codegen
+- [architecture.md](./architecture.md) — Technical design for implementation and codegen (§1–§19)
+- [swarm-runtime.md](./swarm-runtime.md) — Fix-swarm orchestration
+- [sandbox.md](./sandbox.md) — Docker isolation spec for all probe execution
 - [audit-archive.md](./audit-archive.md) — TOON audit history in git
 - [scanner-catalog.md](./scanner-catalog.md) — Scanner ID registry
 - [AGENTS.md](../AGENTS.md) — Coding agent instructions
 - [agent-skills.md](./agent-skills.md) — Swarm agent identities (skills repo)
-- [skills/README.md](../skills/README.md) — Commander, Red, Blue, and the full roster
+- [skills/README.md](../skills/README.md) — Commander, Red, Blue, and the full roster (769 skills)
