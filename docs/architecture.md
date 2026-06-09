@@ -933,7 +933,7 @@ See [sandbox.md](./sandbox.md) for GitHub Actions workflow example.
 
 ## 18. External skills catalog
 
-800 practitioner cybersecurity playbooks live in `skills/` alongside Among-Check agent skills (812 total). No external repo dependency — all content is vendored. Skills are classified into **numbered category folders** (`01-` → `29-`) so agents can navigate by domain without scanning a flat 800-entry list.
+977 practitioner cybersecurity playbooks live in `skills/` alongside Among-Check agent skills (989 total). No external repo dependency — all content is vendored. Skills are classified into **numbered category folders** (`01-` → `30-`) so agents can navigate by domain without scanning a flat 977-entry list.
 
 ### 18.1 Sources
 
@@ -941,6 +941,7 @@ See [sandbox.md](./sandbox.md) for GitHub Actions workflow example.
 |--------|--------|---------|-----------------|
 | [Claude-Code-CyberSecurity-Skill](https://github.com/Masriyan/Claude-Code-CyberSecurity-Skill) by [@Masriyan](https://github.com/Masriyan) | 46 topic files | MIT | `skills/01-` … `skills/15-` |
 | [Anthropic Cybersecurity Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) by [@mukul975](https://github.com/mukul975) | 754 playbooks | Apache 2.0 | `skills/16-` … `skills/29-` |
+| [awesome-ai-security](https://github.com/ottosulin/awesome-ai-security) by [@ottosulin](https://github.com/ottosulin) | 177 tools/frameworks | MIT | `skills/30-ai-security/` |
 
 ### 18.2 Category structure
 
@@ -966,7 +967,16 @@ skills/
 ├── 26-ics-iot-ot-security/            (31)
 ├── 27-devsecops-supply-chain/         (25)
 ├── 28-cryptography-pki/               (22)
-└── 29-zero-trust-network-access/      (21)
+├── 29-zero-trust-network-access/      (21)
+└── 30-ai-security/                    (177 — LLM/AI security tools, frameworks, models)
+    ├── learning-resources/
+    ├── governance-risk/
+    ├── attack-red-teaming/
+    ├── benchmarks-evals/
+    ├── defense-controls/
+    ├── agentic-skills/
+    ├── security-ai-models/
+    └── datasets/
 ```
 
 ### 18.3 Agent → category mapping

@@ -2,7 +2,7 @@
 
 **Tagline:** Find imposters among codebase.
 
-812 cybersecurity skills in one place — 12 agent identities + 800 practitioner playbooks. All skills live here in `skills/`; no external dependency at runtime.
+989 cybersecurity skills in one place — 12 agent identities + 977 practitioner playbooks. All skills live here in `skills/`; no external dependency at runtime.
 
 ---
 
@@ -37,6 +37,7 @@ Machine-readable manifest: [registry.toon](registry.toon)
 skills/
 ├── 01-15-*/          # Claude-Code-CyberSecurity-Skill (46 topic files, 15 categories)
 ├── 16-29-*/          # Anthropic Cybersecurity Skills (754 playbooks, 14 categories)
+├── 30-ai-security/   # awesome-ai-security (177 tools/frameworks, 8 categories)
 └── agent-*/          # Among-Check swarm agents (12 SKILL.md files)
 ```
 
@@ -88,6 +89,25 @@ Each numbered folder contains individual skill subfolders with `SKILL.md` (playb
 | 27 | DevSecOps & Supply Chain | 25 | Orange | [27-devsecops-supply-chain/](27-devsecops-supply-chain/) |
 | 28 | Cryptography & PKI | 22 | Blue, Yellow | [28-cryptography-pki/](28-cryptography-pki/) |
 | 29 | Zero Trust & Network Access | 21 | Green, Blue | [29-zero-trust-network-access/](29-zero-trust-network-access/) |
+
+---
+
+### 30 awesome-ai-security
+
+**Credit:** [awesome-ai-security](https://github.com/ottosulin/awesome-ai-security) by [@ottosulin](https://github.com/ottosulin) · MIT License
+
+| Category | Skills | Agent(s) | Path |
+|----------|--------|----------|------|
+| Learning Resources | 19 | Commander | [30-ai-security/](30-ai-security/) |
+| Governance & Risk | 22 | Commander, Blue | [30-ai-security/](30-ai-security/) |
+| Attack Techniques & Red Teaming | 39 | Red, Commander | [30-ai-security/](30-ai-security/) |
+| Benchmarks & Evaluations | 5 | Commander, Red | [30-ai-security/](30-ai-security/) |
+| Defense & Security Controls | 57 | Blue, Green, Commander | [30-ai-security/](30-ai-security/) |
+| Agentic AI Security Skills | 10 | Commander, Pink | [30-ai-security/](30-ai-security/) |
+| Security-Focused AI Models | 11 | Commander, Red | [30-ai-security/](30-ai-security/) |
+| Datasets | 4 | Commander, Red | [30-ai-security/](30-ai-security/) |
+
+Full index: [30-ai-security/README.md](30-ai-security/README.md)
 
 ---
 

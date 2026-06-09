@@ -66,7 +66,8 @@ Results are committed to `audits/` in TOON format after every scan.
 769 cybersecurity playbooks in `skills/` — no external dependency:
 
 - **754 skills** from [Anthropic Cybersecurity Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) ([@mukul975](https://github.com/mukul975), Apache 2.0)
-- **15 skills** from [Claude-Code-CyberSecurity-Skill](https://github.com/Masriyan/Claude-Code-CyberSecurity-Skill) ([@Masriyan](https://github.com/Masriyan), MIT)
+- **46 skills** from [Claude-Code-CyberSecurity-Skill](https://github.com/Masriyan/Claude-Code-CyberSecurity-Skill) ([@Masriyan](https://github.com/Masriyan), MIT)
+- **177 skills** from [awesome-ai-security](https://github.com/ottosulin/awesome-ai-security) ([@ottosulin](https://github.com/ottosulin), MIT) — LLM/AI security tools, frameworks, guardrails, red-teaming
 
 Each Among-Check agent's `SKILL.md` lists the relevant external skills for that agent with no redundancy.
 
