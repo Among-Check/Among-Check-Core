@@ -109,7 +109,7 @@ among-check-core/
 │   ├── audit-archive.md      # TOON schemas & agent workflow
 │   └── scanner-catalog.md
 ├── .cursor/
-│   └── skills/               # Mirror of skills/ for Cursor discovery
+│   └── rules/                # Cursor agent rules (skills live in skills/)
 ├── .claude/
 ├── .github/
 ├── AGENTS.md
@@ -610,7 +610,7 @@ Each swarm member has an **individual identity** as a Cursor/Claude skill in `sk
 | White | `agent-audit` | `packages/core` (archive) |
 | Pink | `agent-fix` | `packages/core` (fix prompts) |
 
-Mirrored to `.cursor/skills/` for editor discovery. See [agent-skills.md](./agent-skills.md).
+All skills live in `skills/` — no mirror. See [agent-skills.md](./agent-skills.md).
 
 ---
 

@@ -57,5 +57,6 @@ jobs:
           test -f audits/latest.toon
           test -f skills/registry.toon
           test -f skills/orchestrator/SKILL.md
-          test -f .cursor/skills/orchestrator/SKILL.md
+          test -f skills/exploiting-sql-injection-vulnerabilities/SKILL.md
+          test -f skills/09-web-security/SKILL.md
           test -f .cursor/rules/project-core.mdc

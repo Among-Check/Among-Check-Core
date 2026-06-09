@@ -50,7 +50,7 @@ Preconfigured for AI-assisted development:
 
 | Tool | Config |
 |------|--------|
-| **Cursor** | [.cursor/rules/](.cursor/rules/), [.cursor/skills/](.cursor/skills/), [.cursor/mcp.json](.cursor/mcp.json) |
+| **Cursor** | [.cursor/rules/](.cursor/rules/), [skills/](skills/), [.cursor/mcp.json](.cursor/mcp.json) |
 | **Claude Code** | [CLAUDE.md](CLAUDE.md), [.claude/](.claude/) |
 | **GitHub** | [.github/](.github/) — CI, issue/PR templates, Dependabot |
 
@@ -59,3 +59,4 @@ Preconfigured for AI-assisted development:
 ## Status
 
 Documentation and agent scaffolding are ready. Application code starts at **Phase 0** in [docs/architecture.md](docs/architecture.md) (pnpm monorepo, core orchestrator, CLI, MCP stub).
+

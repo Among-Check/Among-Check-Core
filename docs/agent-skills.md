@@ -1,6 +1,6 @@
 # Agent Skills Registry
 
-Among-Check uses **named agent identities** — each with a codename, skill file, and scanner scope. Skills live in [skills/](../skills/) and are mirrored to [.cursor/skills/](../.cursor/skills/) for Cursor.
+Among-Check uses **named agent identities** — each with a codename, skill file, and scanner scope. All skills live in [skills/](../skills/) — including 754 Anthropic cybersecurity playbooks and 15 Claude Code CyberSecurity skills.
 
 **Tagline:** Find imposters among codebase.
 
@@ -41,9 +41,10 @@ flowchart TB
 
 | Path | Purpose |
 |------|---------|
-| `skills/<agent>/SKILL.md` | Canonical agent identity + instructions |
-| `skills/registry.toon` | Machine-readable roster |
-| `.cursor/skills/<agent>/SKILL.md` | Cursor discovery mirror |
+| `skills/<agent>/SKILL.md` | Among-Check swarm agent identity |
+| `skills/<skill-name>/SKILL.md` | Cybersecurity playbook (769 total) |
+| `skills/01-recon-osint/` … `skills/15-blue-team-defense/` | Masriyan Claude Code CyberSecurity skills |
+| `skills/registry.toon` | Machine-readable swarm roster |
 
 ---
 

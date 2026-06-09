@@ -24,6 +24,38 @@ Each folder is an **individual agent identity** in the Among-Check swarm — a C
 
 Machine-readable manifest: [registry.toon](registry.toon)
 
+## Cybersecurity skills
+
+Each skill is a folder: `skills/<skill-name>/SKILL.md`
+
+### Anthropic Cybersecurity Skills (754)
+
+Example: `skills/exploiting-sql-injection-vulnerabilities/SKILL.md`
+
+**Credit:** [Anthropic Cybersecurity Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) by Mahipal Jangra ([@mukul975](https://github.com/mukul975)) · Apache 2.0 · not affiliated with Anthropic PBC.
+
+### Claude Code CyberSecurity Skills (15)
+
+| Skill | Path |
+|-------|------|
+| Recon & OSINT | `skills/01-recon-osint/SKILL.md` |
+| Vulnerability Scanner | `skills/02-vulnerability-scanner/SKILL.md` |
+| Exploit Development | `skills/03-exploit-development/SKILL.md` |
+| Reverse Engineering | `skills/04-reverse-engineering/SKILL.md` |
+| Malware Analysis | `skills/05-malware-analysis/SKILL.md` |
+| Threat Hunting | `skills/06-threat-hunting/SKILL.md` |
+| Incident Response | `skills/07-incident-response/SKILL.md` |
+| Network Security | `skills/08-network-security/SKILL.md` |
+| Web Security | `skills/09-web-security/SKILL.md` |
+| Cloud Security | `skills/10-cloud-security/SKILL.md` |
+| CSOC Automation | `skills/11-csoc-automation/SKILL.md` |
+| Log Analysis | `skills/12-log-analysis/SKILL.md` |
+| Crypto Analysis | `skills/13-crypto-analysis/SKILL.md` |
+| Red Team Ops | `skills/14-red-team-ops/SKILL.md` |
+| Blue Team Defense | `skills/15-blue-team-defense/SKILL.md` |
+
+**Credit:** [Claude-Code-CyberSecurity-Skill](https://github.com/Masriyan/Claude-Code-CyberSecurity-Skill) by [@Masriyan](https://github.com/Masriyan) · MIT License
+
 ## Commander attach
 
 All multi-agent sessions start through Commander. Read [docs/swarm-runtime.md](../docs/swarm-runtime.md) before assigning scouts.
@@ -32,7 +64,7 @@ All multi-agent sessions start through Commander. Read [docs/swarm-runtime.md](.
 
 ### Cursor
 
-Skills are mirrored under [.cursor/skills/](../.cursor/skills/) for editor discovery. Source of truth is this `skills/` directory.
+All skills live in this `skills/` directory — agents read `skills/<name>/SKILL.md` directly.
 
 ### Claude Code
 
@@ -49,5 +81,4 @@ Reference skill paths from [AGENTS.md](../AGENTS.md) or invoke slash commands in
 
 1. Create `skills/agent-<name>/SKILL.md` with identity + scope
 2. Add row to `registry.toon` and this README
-3. Mirror to `.cursor/skills/agent-<name>/SKILL.md`
-4. Update [docs/agent-skills.md](../docs/agent-skills.md)
+3. Update [docs/agent-skills.md](../docs/agent-skills.md)
